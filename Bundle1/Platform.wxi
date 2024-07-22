@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+	<?if $(var.Platform) == "x64"?>
+		<?define PlatformX86 = 0?>
+		<?define PlatformX64 = 1?>
+		<?define LocalPlaform = x64?>
+		<?define Bitness = always64?>
+	<?else?>
+		<?define PlatformX86 = 1?>
+		<?define PlatformX64 = 0?>
+		<?define LocalPlaform = x86?>
+		<?define Bitness = always32?>
+	<?endif?>
+
+	<?define DotNetBuildNumber = 6.0.26.33205?>
+	<?define NetCoreEulaLink = https://go.microsoft.com/fwlink/?LinkId=329770?>
+
+	<?define DotNetDesktopRedistLog = DotNetDesktopRuntime629RedistLog"?>
+	<?define DotNetDesktopRedistInstallArguments = /install /quiet /log "[$(var.DotNetDesktopRedistLog)]"?>
+	<?define DotNetDesktopRedistExecName = redist\windowsdesktop-runtime-6.0.26-win-$(var.LocalPlaform).exe?>
+	<?define DotNetDesktopRedistProductName = Microsoft .NET Desktop Runtime - 6.0.26 ($(var.LocalPlaform))?>
+
+	<?if $(var.LocalPlaform) == "x86" ?>
+		<?define DotNetDesktopRedistLink = https://download.visualstudio.microsoft.com/download/pr/d6835aa3-6ec4-47ec-a5a5-9052ed310e4f/c1171996e95717bf532475f4546e479c/windowsdesktop-runtime-6.0.26-win-x86.exe?>
+		<?define DotNetDesktopRedistHash = bd0878b65750173e2d99479ae051daa9e71a0ee1949c600ed4a33856e4bdd2b658ebbd1439977d17c0d2fd8f3bb37c1592c4f46a4def9c534addac3a9f4a72a2?>
+		<?define DotNetDesktopRedistSize = 52244696?>
+	<?else?>
+		<?define DotNetDesktopRedistLink = https://download.visualstudio.microsoft.com/download/pr/3136e217-e5b7-4899-9b7e-aa52ecb8b108/d74134edaa75e3300f8692660b9fb7b5/windowsdesktop-runtime-6.0.26-win-x64.exe?>
+		<?define DotNetDesktopRedistHash = 7DD45E746FB0B82C13B91559AC25A39B66B9C94C22E5F9BD91B1DCEAFF96922B1DA2FED152EC36E15F2C7A38E0180508F81807930928C5D0AEA225F117A108C4?>
+		<?define DotNetDesktopRedistSize = 57530448?>
+	<?endif?>
+
+	<?define DotNetASPRedistLog = DotNetASPRuntime626RedistLog"?>
+	<?define DotNetASPRedistInstallArguments = /install /quiet /log "[$(var.DotNetASPRedistLog)]"?>
+	<?define DotNetASPRedistExecName = redist\aspnetcore-runtime-6.0.26-win-$(var.LocalPlaform).exe?>
+	<?define DotNetASPRedistProductName = Microsoft .NET ASP.NET Runtime - 6.0.26 ($(var.LocalPlaform))?>
+
+	<?if $(var.LocalPlaform) == "x86" ?>
+		<?define DotNetASPRedistLink = https://download.visualstudio.microsoft.com/download/pr/a9326bbe-0d19-4980-af79-58095f22e956/fade24808fb03539ace50016367f3350/aspnetcore-runtime-6.0.26-win-x86.exe?>
+		<?define DotNetASPRedistHash = 7106df0967bb741942147715b14bb4cd43fbdcc76e7344ae6a843e02cc0d66371f186248d99881fb5b8124c68103a681609b6b7da048a6377cdb9f9e6e2a9e91?>
+		<?define DotNetASPRedistSize = 8203648?>
+	<?else?>
+		<?define DotNetASPRedistLink = https://download.visualstudio.microsoft.com/download/pr/504867be-8cc2-4982-a4a6-5d3596835347/1868f16e22e6c13795d397fead4b9545/aspnetcore-runtime-6.0.26-win-x64.exe?>
+		<?define DotNetASPRedistHash = d444d22a2f5105aa60464e47e2afc67d35d9a1e8482da739b654e1b4bcd377e84653f46146dfcaee4fb8405f821971212f4a75c5678c25d49a628bb4adbdc383?>
+		<?define DotNetASPRedistSize = 9002824?>
+	<?endif?>
+
+	<?define AccessDBEngineRedistLog = AccessDBEngineRedistLog"?>
+	<?define AccessDBEngineRedistInstallArguments = /quiet /passive /norestart?>
+
+	<?define AccessDBEngineBuildNumber = 16.0.5044.1000?>
+	<?define AccessDBEngineRedistProductName = Microsoft Access Runtime 2016 ($(var.LocalPlaform))?>
+
+	<?if $(var.LocalPlaform) == "x86" ?>
+	<?define AccessDBEngineRedistLink = https://download.microsoft.com/download/3/5/C/35C84C36-661A-44E6-9324-8786B8DBE231/accessdatabaseengine.exe?>
+	<?define AccessDBEngineRedistExecName = redist\accessdatabaseengine.exe?>
+	<?define AccessDBEngineRedistHash = 4141A61D8750E9CE3F83B83DB915F906C0475A5870641BC81273AFB790DB44191E127854C5755F65A57E98F7A1AFDD7A0A0809DB9072BB51456B9EAC50538057?>
+	<?define AccessDBEngineRedistSize = 81621424?>
+	<?else?>
+	<?define AccessDBEngineRedistLink = https://download.microsoft.com/download/3/5/C/35C84C36-661A-44E6-9324-8786B8DBE231/accessdatabaseengine_X64.exe?>
+	<?define AccessDBEngineRedistExecName = redist\accessdatabaseengine_X64.exe?>
+	<?define AccessDBEngineRedistHash = 264545F31A74E2E776CA9E9E3A8D066DA20C1EFC0E4A2BB70BC53AB52CA2B7ACA9A88D5EF51143CA6ECE5594D3E0B8BA689C4752681B29337F44439DFFD9D743?>
+	<?define AccessDBEngineRedistSize = 83400344?>
+	<?endif?>
+
+</Include>

@@ -1,0 +1,23 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" 
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+	 xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+  <Bundle Name="TBC"   
+		  Manufacturer="TBC" 
+		  Version="2.0" 
+		  UpgradeCode="5a797eb4-41e7-4148-80ae-63fdeb135a85"
+  >
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication LicenseUrl="" 
+											  Theme="hyperlinkSidebarLicense"
+											  SuppressOptionsUI="yes" ShowVersion="yes" />
+    </BootstrapperApplication>
+
+    <Chain>
+		<PackageGroupRef Id="PrereqCPlusPlusRedis" />
+		<PackageGroupRef Id="PrereqNetDesktopRuntime" />
+		<PackageGroupRef Id="PrereqNetASPRuntime" />
+		<PackageGroupRef Id="PrereqAccessDBEngine" />
+    </Chain>
+
+  </Bundle>
+</Wix>

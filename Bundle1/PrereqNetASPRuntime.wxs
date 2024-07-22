@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
+
+	<?include Platform.wxi?>
+
+	<Fragment>
+		<netfx:DotNetCoreSearch Id="DOTNETASPRUNTIME6" 
+								RuntimeType="aspnet" 
+								Platform="$(var.LocalPlaform)"
+								MajorVersion="6" 
+								Variable="DOTNETASPRUNTIME6" />
+		
+		<PackageGroup Id="PrereqNetASPRuntime">
+			<ExePackage InstallArguments="$(var.DotNetASPRedistInstallArguments)"
+						PerMachine="yes"
+						DetectCondition="DOTNETASPRUNTIME6"
+						InstallCondition="(NOT DOTNETASPRUNTIME6)"
+						Id="DotNetASPRuntime6Redist"
+						Vital="yes" Permanent="yes" Protocol="burn" CacheId="NetASPRuntime"
+						LogPathVariable="$(var.DotNetASPRedistLog)" Cache="remove">
+				<ExePackagePayload Name="$(var.DotNetASPRedistExecName)"
+								   DownloadUrl="$(var.DotNetASPRedistLink)"
+								   ProductName="$(var.DotNetASPRedistProductName)"
+								   Description="$(var.DotNetASPRedistProductName)"
+								   Hash="$(var.DotNetASPRedistHash)"
+								   Size="$(var.DotNetASPRedistSize)" 
+								   Version="$(var.DotNetBuildNumber)" />
+			</ExePackage>
+		</PackageGroup>
+
+	</Fragment>
+</Wix>

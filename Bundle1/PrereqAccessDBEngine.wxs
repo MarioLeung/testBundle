@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+	 xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+	<?include Platform.wxi?>
+	
+    <Fragment>
+
+		<util:RegistrySearch
+            Id="RegistrySearchAccessDBEngine16_x86"
+            Variable="DBEngine16Installed32"
+            Root="HKLM"
+            Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{90160000-00D1-0409-0000-0000000FF1CE}"
+            Value="DisplayName"
+            Result="exists"
+            Bitness="always32" />
+
+		<util:RegistrySearch
+            Id="RegistrySearchAccessDBEngine16_x64"
+            Variable="DBEngine16Installed64"
+            Root="HKLM"
+            Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{90160000-00D1-0409-1000-0000000FF1CE}"
+            Value="DisplayName"
+            Result="exists"
+            Bitness="always64" />
+		
+		<!-- note: for installation checking -->
+	    <util:RegistrySearch
+            Id="RegistrySearchAccessDBEngine16"
+            Variable="AccessDBEngine16"
+            Root="HKLM"
+            Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{90160000-00D1-0409-1000-0000000FF1CE}"
+            Value="DisplayName"
+            Result="exists"
+            Bitness="$(var.Bitness)" />
+		
+		<PackageGroup Id="PrereqAccessDBEngine">
+			<ExePackage InstallArguments="$(var.AccessDBEngineRedistInstallArguments)"
+						PerMachine="yes"
+						DetectCondition="AccessDBEngine16"
+						InstallCondition="NOT AccessDBEngine16"
+						Id="AccessDBEngineRedist"
+						Vital="yes" Permanent="yes" Protocol="none" CacheId="AccessDBEngine"
+						LogPathVariable="$(var.AccessDBEngineRedistLog)" Cache="remove"
+						>
+				<ExePackagePayload Name="$(var.AccessDBEngineRedistExecName)"
+								   DownloadUrl="$(var.AccessDBEngineRedistLink)"
+								   ProductName="$(var.AccessDBEngineRedistProductName)"
+								   Description="$(var.AccessDBEngineRedistProductName)"
+								   Hash="$(var.AccessDBEngineRedistHash)"
+								   Size="$(var.AccessDBEngineRedistSize)"
+								   Version="$(var.AccessDBEngineBuildNumber)"/>
+			</ExePackage>
+		</PackageGroup>
+
+    </Fragment>
+</Wix>

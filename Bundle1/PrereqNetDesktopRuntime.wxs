@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
+
+	<?include Platform.wxi?>
+
+	<Fragment>
+		<netfx:DotNetCoreSearch Id="DOTNETDESKTOPRUNTIME6" 
+								RuntimeType="desktop" 
+								Platform="$(var.LocalPlaform)" 
+								MajorVersion="6" 
+								Variable="DOTNETDESKTOPRUNTIME6" />
+
+		<PackageGroup Id="PrereqNetDesktopRuntime">
+			<ExePackage InstallArguments="$(var.DotNetDesktopRedistInstallArguments)"
+						PerMachine="yes"
+						DetectCondition="DOTNETDESKTOPRUNTIME6"
+						InstallCondition="(NOT DOTNETDESKTOPRUNTIME6)"
+						Id="DotNetDesktopRuntime6Redist"
+						Vital="yes" Permanent="yes" Protocol="burn" CacheId="NetDesktopRuntime"
+						LogPathVariable="$(var.DotNetDesktopRedistLog)" Cache="remove">
+				<ExePackagePayload Name="$(var.DotNetDesktopRedistExecName)"
+								   DownloadUrl="$(var.DotNetDesktopRedistLink)"
+								   ProductName="$(var.DotNetDesktopRedistProductName)"
+								   Description="$(var.DotNetDesktopRedistProductName)"
+								   Hash="$(var.DotNetDesktopRedistHash)"
+								   Size="$(var.DotNetDesktopRedistSize)" 
+								   Version="$(var.DotNetBuildNumber)" />
+			</ExePackage>
+		</PackageGroup>
+
+	</Fragment>
+</Wix>
